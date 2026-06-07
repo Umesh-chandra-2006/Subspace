@@ -79,7 +79,7 @@ def safety_checkpoint(contacts: list[dict]) -> bool:
     return answer in ("yes", "y")
 
 
-def run_pipeline(seed_domain: str, mock: bool, demo: bool = False):
+def run_pipeline(seed_domain: str, mock: bool, demo: bool = False, limit: int = 10):
     banner()
 
     if mock:
@@ -91,7 +91,7 @@ def run_pipeline(seed_domain: str, mock: bool, demo: bool = False):
 
     # ── Stage 1: Ocean.io ────────────────────────────────────────────────────
     section("Stage 1 / 4 - Ocean.io: Finding lookalike companies")
-    companies = find_lookalike_companies(seed_domain, limit=10, mock=mock)
+    companies = find_lookalike_companies(seed_domain, limit=limit, mock=mock)
 
     if not companies:
         warn("No companies found. Try a different seed domain.")
@@ -186,6 +186,12 @@ if __name__ == "__main__":
         action="store_true",
         help="Demo mode — redirects all outgoing emails to YOUR_EMAIL in .env for safety",
     )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=10,
+        help="Number of lookalike companies to fetch (default: 10)",
+    )
 
     args = parser.parse_args()
-    run_pipeline(args.domain.strip().lower(), mock=args.mock, demo=args.demo)
+    run_pipeline(args.domain.strip().lower(), mock=args.mock, demo=args.demo, limit=args.limit)
