@@ -93,7 +93,7 @@ Proceed and send all emails? [yes/no]:
 
 ---
 
-## 🛡️ Error Handling & Resiliency Features
+##  Error Handling & Resiliency Features
 1.  **Windows Console Safety:** Standard ASCII indicators (`[OK]`, `[!!]`, `->`) are used across all console logs to prevent unicode encoding crashes (`UnicodeEncodeError` on CP1252/Windows Command Prompt).
 2.  **Prospeo NO_RESULTS 400 Graceful Intercept:** Prevents the retry loop from looping on 400 status codes when Prospeo returns a `NO_RESULTS` response code.
 3.  **Exponential Backoff:** Retries rate-limited `429` requests using double-interval backoffs (`2.0s` -> `4.0s` -> `8.0s`).
