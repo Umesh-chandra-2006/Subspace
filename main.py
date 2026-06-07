@@ -79,7 +79,7 @@ def safety_checkpoint(contacts: list[dict]) -> bool:
     return answer in ("yes", "y")
 
 
-def run_pipeline(seed_domain: str, mock: bool):
+def run_pipeline(seed_domain: str, mock: bool, demo: bool = False):
     banner()
 
     if mock:
@@ -124,6 +124,14 @@ def run_pipeline(seed_domain: str, mock: bool):
     success(f"{len(enriched)} verified emails resolved")
     for c in enriched:
         print(f"    • {c['name']} -> {c['email']}")
+
+    # ── Demo Redirection Override ────────────────────────────────────────────
+    if not mock and demo:
+        demo_email = os.getenv("YOUR_EMAIL")
+        if demo_email:
+            print(Fore.CYAN + Style.BRIGHT + f"\n  [DEMO MODE] Redirecting all recipient emails to {demo_email} for safety...")
+            for c in enriched:
+                c["email"] = demo_email
 
     # ── Safety Checkpoint ────────────────────────────────────────────────────
     if not mock:
@@ -173,6 +181,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Run with mock data — no real API calls made",
     )
+    parser.add_argument(
+        "--demo",
+        action="store_true",
+        help="Demo mode — redirects all outgoing emails to YOUR_EMAIL in .env for safety",
+    )
 
     args = parser.parse_args()
-    run_pipeline(args.domain.strip().lower(), mock=args.mock)
+    run_pipeline(args.domain.strip().lower(), mock=args.mock, demo=args.demo)
