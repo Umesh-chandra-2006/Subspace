@@ -4,7 +4,7 @@ A high-performance, decoupled, and self-healing 4-stage B2B outreach pipeline wr
 
 ---
 
-## 🚀 Pipeline Architecture
+##  Pipeline Architecture
 
 The pipeline consists of four distinct stages structured for credit conservation, resilience, and compliance:
 
@@ -40,7 +40,7 @@ Sends personalized cold outreach emails using transactional SMTP templates.
 
 ---
 
-## 🛠️ Installation & Setup
+##  Installation & Setup
 
 1.  **Clone the repository:**
     ```bash
@@ -65,7 +65,7 @@ Sends personalized cold outreach emails using transactional SMTP templates.
 
 ---
 
-## 💻 Usage
+##  Usage
 
 ### Mock Mode (Dry Run)
 Test the entire pipeline layout locally without making real API calls or spending credits:
