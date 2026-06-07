@@ -108,7 +108,7 @@ def find_decision_makers(companies: list[dict], mock: bool = False) -> list[dict
 
         # Retry loop for resilience (handling 429 and errors)
         max_retries = 3
-        retry_delay = 2.0
+        retry_delay = 5.0
         success = False
         data = {}
 
@@ -175,7 +175,7 @@ def find_decision_makers(companies: list[dict], mock: bool = False) -> list[dict
             })
 
         # Polite rate limiting between companies
-        time.sleep(1.0)
+        time.sleep(3.0)
 
     print(f"  [Prospeo] Found {len(all_contacts)} unique decision-makers total.")
     return all_contacts
